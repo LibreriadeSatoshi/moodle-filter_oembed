@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package   filter_oembed
+ * @module     filter_oembed/manageproviders
  * @copyright Guy Thomas / moodlerooms.com 2016
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -168,8 +168,8 @@ define(['jquery', 'core/notification', 'core/ajax', 'core/templates', 'core/frag
                  * Turn editing off for a row by id
                  * @param {string} providerId
                  */
-                var turnEditingOff = function(provderId) {
-                    var sel = '#oembed-display-providers_' + provderId;
+                var turnEditingOff = function(providerId) {
+                    var sel = '#oembed-display-providers_' + providerId;
                     $(sel).removeClass('oembed-provider-editing');
                     $(sel + ' form').remove();
                     $(sel + ' td div.alert').remove();
@@ -177,7 +177,9 @@ define(['jquery', 'core/notification', 'core/ajax', 'core/templates', 'core/frag
 
                 /**
                  * Update the provider form with data.
-                 * @param string data - serialized form data.
+                 * @param {number} pid Provider ID.
+                 * @param {string} data Serialized form data.
+                 * @param {Function} callback Called when the form is loaded.
                  */
                 var updateProviderForm = function(pid, data, callback) {
 
