@@ -29,29 +29,29 @@ define(['jquery', 'core/log'], function($, Log) {
     var init = function() {
         $('.oembed-client-render').each(function() {
             var $container = $(this);
-            
+
             if ($container.data('processed')) {
                 return;
             }
             $container.data('processed', true);
-            
+
             var oembedUrl = $container.data('oembed-url');
             var originalUrl = $container.data('original-url');
             var params = $container.data('params');
-            
+
             if (!oembedUrl) {
                 Log.debug('filter_oembed/clientrender: No oembed URL provided');
                 $container.html('<a href="' + originalUrl + '">' + originalUrl + '</a>');
                 return;
             }
-            
+
             $.ajax({
                 url: oembedUrl,
                 dataType: 'json',
                 success: function(data) {
                     if (data && data.html) {
                         var embed = data.html;
-                        
+
                         if (params) {
                             var paramStr = '';
                             for (var key in params) {
@@ -61,12 +61,12 @@ define(['jquery', 'core/log'], function($, Log) {
                             }
                             embed = embed.replace('?feature=oembed', '?feature=oembed' + paramStr);
                         }
-                        
+
                         var aspectRatio = 0;
                         if (data.width && data.height) {
                             aspectRatio = data.height / data.width;
                         }
-                        
+
                         if (aspectRatio > 0) {
                             var padding = aspectRatio * 100;
                             var paddiv = '<div class="oembed-responsive-pad" style="padding-top:' + padding + '%"></div>';
@@ -80,7 +80,7 @@ define(['jquery', 'core/log'], function($, Log) {
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    Log.debug('filter_oembed/clientrender: Error loading oembed content for ' + originalUrl + 
+                    Log.debug('filter_oembed/clientrender: Error loading oembed content for ' + originalUrl +
                               ' - ' + textStatus + ': ' + errorThrown);
                     $container.html('<a href="' + originalUrl + '">' + originalUrl + '</a>');
                 }

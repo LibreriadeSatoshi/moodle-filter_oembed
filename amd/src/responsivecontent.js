@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package   filter_oembed
+ * @module     filter_oembed/responsivecontent
  * @copyright Guy Thomas / moodlerooms.com 2016
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,7 +31,7 @@ define(['jquery'], function($) {
 
         /**
          * Apply to specific node / nodes or use selector.
-         * @param {jQuery|null} nodes- jquery node / collection of nodes or null
+         * @param {jQuery|null} nodes - jquery node / collection of nodes or null
          */
         this.apply = function(nodes) {
             if (!nodes){
